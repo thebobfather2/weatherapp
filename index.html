@@ -7,6 +7,7 @@
     <!-- bootstrap -->
     <link rel="stylesheet" type="text/css" href="./assets/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery.js"></script>
     <title>WeatherApp</title>
 </head>
 <body>
@@ -26,8 +27,25 @@
                   <div class="carousel-item active">
                       <div class="row">
                         <div class="col-6">
-                          <div class="temp">23&deg;</div> 
-                          <div class="location">Coimbra, Portugal</div>
+                            <!-- current time -->
+                            <div id="currentDay"></div>
+                            <!-- current temperature -->
+                            <div class="temp">23&deg;</div>
+                            <!-- city input -->
+                            <div>
+                                <p><h3>Find Location:</h3></p>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input id="city-input" type="text" placeholder="Enter City Name"
+                                    aria-label="Enter city name">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" id="search-button">
+                                        Search
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        <button type="button" id="clear-history">Clear History</button>
                         </div>
                         <div class="col-6 justify-content-right">
                           <img class="img-fluid" src="https://img.icons8.com/plasticine/100/000000/sun.png">
@@ -139,5 +157,9 @@
           </div>
         </div>
     </div>
+    <!-- moment for current time -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <!-- script for weather -->
+    <script src="./assets/script.js"></script>
 </body>
 </html>
