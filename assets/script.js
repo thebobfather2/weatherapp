@@ -27,3 +27,20 @@ $("#search-button").on("click", function (event) {
 
     saveToLocalStorage(q);
 });
+
+// get weather function
+function getWeather(q) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + q + "&appid=" + APIKey;
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+        error: (err => {
+            alert("City not found.")
+            return;
+        })
+    }).then(function (response) {
+        console.log(response)
+        $(".cityList").empty()
+        $("#days").empty()
+    });
+}
