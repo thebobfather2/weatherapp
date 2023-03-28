@@ -71,13 +71,38 @@ function getWeather(q) {
         var windMain = $('<p>').text('Wind Speed : ' + response.wind.speed + 'MPH');
         var cityId = response.id;
 
-        // displayForecast(cityId);
+        displayForecast(cityId);
 
         cityMain1.append(image).append(degreeMain).append(humidityMain).append(windMain);
         $('#cityList').empty();
         $('#cityList').append(cityMain1);
     });
 }
+
+// display the forecast
+function displayForecast(c) {
+    $.ajax({
+        url: "https://api.openweathermap.org/data/2.5/forecast?id=" + c + "&units=imperial&APPID=" + APIKey,
+        method: "GET",
+    }).then(function (response) {
+        var arrayList = response.list;
+        for (var i = 0; i < arrayList.length; i++) {
+            if (arrayList[i].dt_txt.split(' ')[1] === '12:00:00') {
+                console.log(arrayList[i]);
+                var celcius = convertToC(arrayList[i].main.temp);
+                var cityMain = $('<div>');
+                cityMain.addClass('col forecast bg-primary text-white ml-3 mb-3 rounded>');
+                var date5 = $("<h5>").text(response.list[i].dt_txt.split(" ")[0]);
+                var image = $('<img>').attr('src', 'http://openweathermap.org/img/w/' + arrayList[i].weather[0].icon + '.png');
+                var degreeMain = $('<p>').text('Temp : ' + arrayList[i].main.temp + ' °F ('+ celcius + '°C)');               
+                var humidityMain = $('<p>').text('Humidity : ' + arrayList[i].main.humidity + '%');
+                var windMain = $('<p>').text('Wind Speed : ' + arrayList[i].wind.speed + 'MPH');                
+                cityMain.append(date5).append(image).append(degreeMain).append(humidityMain).append(windMain);
+                $('#days').append(cityMain);
+            }
+        }
+    });
+};
 
 // set up storage of city search
 function checkLocalStorage() {
